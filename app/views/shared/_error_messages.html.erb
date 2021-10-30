@@ -1,0 +1,16 @@
+<% if object && object.errors.any? %>
+    <div class="row">
+      <div class="col-sm-12 text-danger text-left">
+        <div>
+          <%= object.errors.count %> errores no permitieron completar la operación:
+        </div>
+        <ul>
+          <% object.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <br/>
+<% end %>

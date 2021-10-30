@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <title>
+    TEST APP: CART WITH STRIPE
+  </title>
+
+  <meta property="og:locale"        content="en_US" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Event Igniter" />
+  <meta property="og:url"           content="https://event-igniter-staging.herokuapp.com/">
+  <meta property="og:description"   content="Event Igniter" />
+  <meta property="og:site_name"     content="Event Igniter" />
+  <!-- <meta property="og:image"         content="http://bogotagraffiti.com/wp-content/uploads/2015/11/og-image.png"> -->
+  <!--
+  <meta name="twitter:card"         content="summary_large_image">
+  <meta name="twitter:title"        content="Bogota Graffiti Tour">
+  <meta name="twitter:site"         content="@bogotagraffiti">
+  <meta name="twitter:image"        content="http://bogotagraffiti.com/wp-content/uploads/2015/11/og-image.png">
+  <meta name="twitter:creator"      content="@user">
+  -->
+
+
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
+
+  <!-- JS External Libraries: Google Analytics -->
+  <%= render 'layouts/ga' %>
+
+  <!-- AlpineJS (for TailwindCSS) -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+<%= render partial: 'shared/flash', locals: { flash: flash } %>
+<%= render 'layouts/facebook' %>
+
+<header>
+  <%= render 'layouts/navbar' %>
+</header>
+
+<aside>
+  <%= render 'layouts/sidebar' %>
+</aside>
+
+<main class="flex">
+  <%= yield %>
+</main>
+
+<footer>
+  <%= render 'layouts/footer' %>
+</footer>
+
+<div id="sidenavOverlay" class="sidenav-overlay closed"></div>
+
+<script>
+    document.addEventListener("turbolinks:load", function() {
+
+    });
+</script>
+
+<%# console %> <!-- TODO: Remove web console for production -->
+
+<!-- JS External Libraries -->
+<%= render 'layouts/social_media' %>
+</body>
+</html>

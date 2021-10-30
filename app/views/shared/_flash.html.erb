@@ -1,0 +1,26 @@
+<% unless flash.empty? %>
+  <!-- Modal Structure -->
+  <% flash.each do |key, value| %>
+    <div id="flash" class="modal modal-flash <%= " #{alert_class(key)} flash-messages" %>">
+
+      <div class="modal-content">
+        <h4 class="text-lg">
+          <%= value %>
+        </h4>
+      </div>
+
+      <div class="modal-close">
+        <a href="#!" class="cursor-pointer">
+          <%= heroicon "x", variant: :solid, options: { class: "h-6 inline" } %>
+        </a>
+      </div>
+
+    </div>
+  <% end %>
+
+  <script>
+      document.addEventListener("turbolinks:load", function() {
+          // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+      })
+  </script>
+<% end %>

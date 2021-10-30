@@ -1,0 +1,25 @@
+<section class="page-wrapper w-full">
+  <div class="min-h-screen h-screen">
+
+
+
+    <div class="bg-black py-16">
+      <div class="container">
+        <h1 class="text-white">StaticPages#index</h1>
+        <p class="text-white">Find me in app/views/static_pages/index.html.erb</p>
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div x-data="{ open: false }">
+        <button x-on:click="open = !open" class="py-4 px-8 bg-yellow-500">Click me</button>
+
+        <div x-show="open">
+          Hello there
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
