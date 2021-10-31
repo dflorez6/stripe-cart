@@ -1,0 +1,16 @@
+<section class="page-wrapper">
+  <div class="container">
+
+    <h1>Editing Product</h1>
+
+    <!-- Form -->
+    <div class="form-wrapper">
+      <%= render 'form', product: @product %>
+    </div>
+    <!-- ./Form -->
+
+    <%= link_to 'Show', @product %> |
+    <%= link_to 'Back', products_path %>
+
+  </div>
+</section>

@@ -239,6 +239,14 @@ Real-time compilation gem. Follow these steps in development environment:
 * Deploy to Heroku via Git
 
 
+* DB Migrations
+  
+
+    heroku run rake db:migrate --app stripe-cart-staging
+    heroku run rake db:migrate --app stripe-cart-prod
+
+
+
 # Other Topics to Include
 
 * System dependencies

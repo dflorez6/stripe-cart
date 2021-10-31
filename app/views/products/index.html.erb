@@ -1,0 +1,42 @@
+<section class="page-wrapper">
+  <div class="container">
+
+    <h1 class="uppercase font-bold mb-4">
+      Products
+    </h1>
+
+    <div class="flex flex-wrap">
+      <% @products.each_slice(4) do |groups_of_four_product| %>
+
+        <div class="flex mb-4">
+          <% groups_of_four_product.each do |product| %>
+            <div class="w-1/4 mb-4 px-4 flex flex-col">
+              <div class="mb-2">
+                <h2 class="font-bold">
+                  <%= product.name %>
+                </h2>
+              </div>
+
+              <div class="">
+                <%= image_tag product.image, alt: product.name %>
+              </div>
+
+              <div class="flex-grow">
+                <p>
+                  <%= product.description %>
+                </p>
+              </div>
+
+              <div class="mt-2">
+                <%= link_to 'buy', '#', class: 'btn-buy' %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,10 @@
+//===============
+// Buttons
+//===============
+.btn-primary {
+  @apply h-10 w-full rounded bg-purple-900 text-white cursor-pointer
+}
+
+.btn-buy {
+  @apply inline-block h-8 w-full bg-purple-900 leading-8 text-white text-center
+}

@@ -16,8 +16,8 @@ import "channels"
 import "stylesheets/application";
 
 // Import JS
-// import "./modal";
-// import "./sidenav";
+import "./modal";
+import "./sidenav";
 
 Rails.start()
 Turbolinks.start()

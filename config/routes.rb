@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'static_pages/index'
+
   # =========================
   # Root
   # =========================
@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   # =========================
   # Resources
   # =========================
+  resources :products do
+    collection do
+      get :index_admin
+    end
+  end
 
   # =========================
   # Authorization
