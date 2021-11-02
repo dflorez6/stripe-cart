@@ -1,0 +1,13 @@
+//===============
+// Navbar
+//===============
+// Generic
+.navbar {
+  @apply bg-purple-900 fixed w-full flex py-4 px-8 justify-center
+}
+
+.navbar {
+  .nav-link {
+    @apply font-semibold uppercase px-4 text-white hover:underline
+  }
+}

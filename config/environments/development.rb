@@ -89,4 +89,9 @@ Rails.application.configure do
   #===============
   # config.force_ssl = true
 
+  #===============
+  # NGrok (Public URLs for testing Webhooks)
+  #===============
+  config.hosts << ENV['NGROK_HOST'] if ENV['NGROK_HOST'].present?
+
 end

@@ -4,9 +4,25 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
 
   before_action :set_locale
+  before_action :initialize_session
+  before_action :load_cart
 
   # Permit other parameters for devise TODO: Uncomment to permit Devise Additional Fields for Sign Up
   # before_action :configure_permitted_parameters, if: :devise_controller?
+
+  #==============
+  # Private Methods
+  #==============
+  private
+  # Use callbacks to share common setup or constraints between actions.
+
+  def initialize_session
+    session[:cart] ||= []
+  end
+
+  def load_cart
+    @cart = Product.find(session[:cart])
+  end
 
   #==============
   # Protected Methods

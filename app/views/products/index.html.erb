@@ -15,6 +15,9 @@
                 <h2 class="font-bold">
                   <%= product.name %>
                 </h2>
+                <h6>
+                  $<%= product.price_with_cents(product) %>
+                </h6>
               </div>
 
               <div class="">
@@ -28,7 +31,11 @@
               </div>
 
               <div class="mt-2">
-                <%= link_to 'buy', '#', class: 'btn-buy' %>
+                <% if @cart.include?(product) %>
+                  <%= link_to 'remove from cart', remove_from_cart_path(product.id), class: 'btn-buy', method: :delete %>
+                <% else %>
+                  <%= link_to 'add to cart', add_to_cart_path(product.id), class: 'btn-buy', method: :post %>
+                <% end %>
               </div>
             </div>
 

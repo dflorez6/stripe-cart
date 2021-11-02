@@ -17,6 +17,11 @@ Rails.application.routes.draw do
     collection do
       get :index_admin
     end
+
+    member do
+      # post :add_to_cart # TODO: Refactor from controller route to resource route
+      # delete :remove_from_cart # TODO: Refactor from controller route to resource route
+    end
   end
 
   # =========================
@@ -26,6 +31,11 @@ Rails.application.routes.draw do
   # =========================
   # Controllers
   # =========================
+  # Cart
+  get '/cart', to: 'products#cart', as: 'cart'
+  post 'products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'  # TODO: Refactor from controller route to resource route
+  delete 'products/remove_from_cart/:id', to: 'products#remove_from_cart', as: 'remove_from_cart' # TODO: Refactor from controller route to resource route
+
   # Data Privacy
   get '/terms-of-service', to: 'static_pages#terms_of_service'
   get '/data-deletion', to: 'static_pages#data_deletion'

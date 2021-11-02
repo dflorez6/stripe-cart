@@ -53,6 +53,27 @@ class ProductsController < ApplicationController
   end
 
   #====================
+  # Cart
+  #====================
+  def cart
+
+  end
+
+  def add_to_cart
+    id = params[:id].to_i
+
+    session[:cart] << id unless session[:cart].include?(id)
+    redirect_to products_path
+  end
+
+  def remove_from_cart
+    id = params[:id].to_i
+
+    session[:cart].delete(id)
+    redirect_back(fallback_location: cart_path)
+  end
+
+  #====================
   # Custom Methods
   #====================
   def index_admin
@@ -72,13 +93,13 @@ class ProductsController < ApplicationController
   # Private
   #====================
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.require(:product).permit(:name, :description, :image, :price)
-    end
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params.require(:product).permit(:name, :description, :image, :price)
+  end
 end
