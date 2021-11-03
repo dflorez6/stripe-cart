@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :initialize_session
   before_action :load_cart
+  before_action :cart_array
 
   # Permit other parameters for devise TODO: Uncomment to permit Devise Additional Fields for Sign Up
   # before_action :configure_permitted_parameters, if: :devise_controller?
@@ -21,7 +22,20 @@ class ApplicationController < ActionController::Base
   end
 
   def load_cart
-    @cart = Product.find(session[:cart])
+    cart = session[:cart]
+    product_ids = []
+
+    # Iterates over cart Session Array, get product_ids from Hash & push them into product_ids Array in order to find Product objects
+    cart.each do |item|
+      product_id = item['id']
+      product_ids << product_id
+    end
+
+    @cart = Product.find(product_ids)
+  end
+
+  def cart_array
+    @cart_array = session[:cart]
   end
 
   #==============

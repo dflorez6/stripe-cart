@@ -34,7 +34,12 @@
                 <% if @cart.include?(product) %>
                   <%= link_to 'remove from cart', remove_from_cart_path(product.id), class: 'btn-buy', method: :delete %>
                 <% else %>
-                  <%= link_to 'add to cart', add_to_cart_path(product.id), class: 'btn-buy', method: :post %>
+                  <%= form_with(url: add_to_cart_path(product.id)) do |form| %>
+                    <%= form.hidden_field :quantity, id: :quantity, value: 1 %>
+                    <%= form.hidden_field :price, id: :price, value: product.price %>
+                    <%= form.submit 'add to cart', class: 'btn-buy'  %>
+                    <%#= link_to 'add to cart', add_to_cart_path(product.id), class: 'btn-buy', method: :post %>
+                  <% end %>
                 <% end %>
               </div>
             </div>

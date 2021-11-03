@@ -56,21 +56,47 @@ class ProductsController < ApplicationController
   # Cart
   #====================
   def cart
-
+    total = total_price / 100.0
+    @total_price = sprintf('%.2f', total) # Helper to display price with 2 digit cents (returned value is a string)
   end
 
   def add_to_cart
     id = params[:id].to_i
+    quantity = params[:quantity].to_i
+    price = params[:price].to_i
 
-    session[:cart] << id unless session[:cart].include?(id)
+    session[:cart] << Hash(id: id, quantity: quantity, price: price) unless session[:cart].include?(id)
+
+    # puts '----->'
+    # puts session[:cart]
+
     redirect_to products_path
   end
 
   def remove_from_cart
     id = params[:id].to_i
+    cart = session[:cart]
 
-    session[:cart].delete(id)
+    # Deletes Hash with id from cart Array
+    cart.delete_if { |h| h['id'] == id }
+
     redirect_back(fallback_location: cart_path)
+  end
+
+  def total_price
+    cart_array = @cart_array
+    subtotal_prices_array = []
+
+    # Iterates over cart_array and creates a new array of price * quantity (iterating over every product Hash)
+    cart_array.each do |product|
+      price = product['price']
+      quantity = product['quantity']
+      subtotal_prices_array << (price * quantity)
+    end
+
+    # Sums all subtotal prices to return Total price
+    total_price = subtotal_prices_array.inject(0, :+)
+    total_price
   end
 
   #====================
