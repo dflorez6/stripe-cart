@@ -43,7 +43,7 @@
                   <%= product_quantity(product) %>
                 </td>
                 <td class="p-2 text-center">
-                  $<%= product.price_with_cents(product) %>
+                  <%= number_to_currency(product.price/100.0) %>
                 </td>
                 <td class="p-2 text-center">
                   $<%= subtotal_price(product) %>
@@ -71,7 +71,7 @@
             <tr>
               <td colspan="3"></td>
               <td>
-                <%= link_to 'Checkout', '', class: 'btn-buy' %>
+                <%= button_to 'Checkout', checkout_create_path, class: 'btn-buy', method: :post, remote: true, data: { disable_with: 'validating...' } %>
               </td>
               <td colspan="1"></td>
             </tr>

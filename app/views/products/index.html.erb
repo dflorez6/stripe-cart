@@ -8,7 +8,7 @@
     <div class="flex flex-wrap">
       <% @products.each_slice(4) do |groups_of_four_product| %>
 
-        <div class="flex mb-4">
+        <div class="flex mb-4 w-full">
           <% groups_of_four_product.each do |product| %>
             <div class="w-1/4 mb-4 px-4 flex flex-col">
               <div class="mb-2">
@@ -16,7 +16,7 @@
                   <%= product.name %>
                 </h2>
                 <h6>
-                  $<%= product.price_with_cents(product) %>
+                  <%= number_to_currency(product.price/100.0) %>
                 </h6>
               </div>
 

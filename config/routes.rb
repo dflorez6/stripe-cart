@@ -24,9 +24,22 @@ Rails.application.routes.draw do
     end
   end
 
+  # Stripe Webhooks
+  resources :webhooks, only: [:create]
+
   # =========================
   # Authorization
   # =========================
+
+  # =========================
+  # Stripe Checkout
+  # =========================
+  # TODO: These are not RESTful routes, refactor them to be used with the resource
+  scope '/checkout' do
+    post 'create', to: 'checkout#create', as: 'checkout_create'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+  end
 
   # =========================
   # Controllers

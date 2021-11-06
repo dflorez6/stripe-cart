@@ -243,6 +243,17 @@ https://dashboard.ngrok.com/get-started/setup
 
     >> ./ngrok http 3000
 
+* Web interface
+
+
+    http://127.0.0.1:4040/inspect/http
+
+## Check Rails Routes from Web
+* In the browser, go to:
+
+
+    http://localhost:3000/rails/info/routes
+
 
 # TEST APP: STRIPE CART | Deployment Guide
 * Deploy to Heroku via Git
