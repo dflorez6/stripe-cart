@@ -1,0 +1,54 @@
+<section class="page-wrapper">
+  <div class="container">
+
+    <h1 class="uppercase font-bold mb-4">
+      Products
+    </h1>
+
+    <div class="flex flex-wrap">
+      <% @products.each_slice(4) do |groups_of_four_product| %>
+
+        <div class="flex mb-4 w-full">
+          <% groups_of_four_product.each do |product| %>
+            <div class="w-1/4 mb-4 px-4 flex flex-col">
+              <div class="mb-2">
+                <h2 class="font-bold">
+                  <%= product.name %>
+                </h2>
+                <h6>
+                  <%= number_to_currency(product.price/100.0) %>
+                </h6>
+              </div>
+
+              <div class="">
+                <%= image_tag product.image, alt: product.name %>
+              </div>
+
+              <div class="flex-grow">
+                <p>
+                  <%= product.description %>
+                </p>
+              </div>
+
+              <div class="mt-2">
+                <% if @cart.include?(product) %>
+                  <%= link_to 'remove from cart', remove_from_cart_path(product.id), class: 'btn-buy', method: :delete %>
+                <% else %>
+                  <%= form_with(url: add_to_cart_path(product.id)) do |form| %>
+                    <%= form.hidden_field :quantity, id: :quantity, value: 1 %>
+                    <%= form.hidden_field :price, id: :price, value: product.price %>
+                    <%= form.submit 'add to cart', class: 'btn-buy'  %>
+                    <%#= link_to 'add to cart', add_to_cart_path(product.id), class: 'btn-buy', method: :post %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+</section>

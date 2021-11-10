@@ -40,6 +40,37 @@ module ApplicationHelper
     end
   end
 
+  #=====================
+  # Cart
+  #=====================
+  def product_quantity(product)
+    id = product.id
+    cart_array = @cart_array
+
+    # Find product Hash by given ID inside cart_array (from session[:cart])
+    product_hash_by_id = cart_array.detect {|h| h['id'] == id }
+    product_quantity = product_hash_by_id['quantity']
+
+    # Return product quantity from product Hash
+    product_quantity
+  end
+
+  def subtotal_price(product)
+    id = product.id
+    cart_array = @cart_array
+
+    # Find product Hash by given ID inside cart_array (from session[:cart])
+    product_hash_by_id = cart_array.detect {|h| h['id'] == id }
+    quantity = product_hash_by_id['quantity']
+    price = product_hash_by_id['price']
+
+    # Calculate subtotal price
+    subtotal_price = (quantity * price) / 100.0
+
+    # Return subtotal_price from Hash
+    sprintf('%.2f', subtotal_price) # Helper to display price with 2 digit cents (returned value is a string)
+  end
+
   # TODO: Application Helper - After Prospect & Subscriber Mailer+Form+Controller are created uncomment this
   #=====================
   # Contact Form

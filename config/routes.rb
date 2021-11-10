@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'static_pages/index'
+
   # =========================
   # Root
   # =========================
@@ -13,14 +13,42 @@ Rails.application.routes.draw do
   # =========================
   # Resources
   # =========================
+  resources :products do
+    collection do
+      get :index_admin
+    end
+
+    member do
+      # post :add_to_cart # TODO: Refactor from controller route to resource route
+      # delete :remove_from_cart # TODO: Refactor from controller route to resource route
+    end
+  end
+
+  # Stripe Webhooks
+  resources :webhooks, only: [:create]
 
   # =========================
   # Authorization
   # =========================
 
   # =========================
+  # Stripe Checkout
+  # =========================
+  # TODO: These are not RESTful routes, refactor them to be used with the resource
+  scope '/checkout' do
+    post 'create', to: 'checkout#create', as: 'checkout_create'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+  end
+
+  # =========================
   # Controllers
   # =========================
+  # Cart
+  get '/cart', to: 'products#cart', as: 'cart'
+  post 'products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'  # TODO: Refactor from controller route to resource route
+  delete 'products/remove_from_cart/:id', to: 'products#remove_from_cart', as: 'remove_from_cart' # TODO: Refactor from controller route to resource route
+
   # Data Privacy
   get '/terms-of-service', to: 'static_pages#terms_of_service'
   get '/data-deletion', to: 'static_pages#data_deletion'
