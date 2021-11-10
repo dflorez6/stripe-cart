@@ -1,0 +1,90 @@
+<section class="page-wrapper">
+  <div class="container">
+
+    <h1 class="uppercase font-bold mb-4 text-center">
+      Cart
+    </h1>
+
+    <div class="flex flex-col">
+      <% if @cart.empty? %>
+        <p>
+          No items in cart.
+        </p>
+      <% else %>
+        <!-- Table -->
+        <div class="flex justify-end mb-4">
+
+          <table class="w-full table-auto">
+            <thead>
+            <tr class="border-b-2 border-gray-500">
+              <th class="p-2 text-center">
+                Product
+              </th>
+              <th class="p-2 text-center">
+                Quantity
+              </th>
+              <th class="p-2 text-center">
+                Price
+              </th>
+              <th class="p-2 text-center">
+                Subtotal
+              </th>
+              <th colspan="1" class="w-7"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @cart.each do |product| %>
+              <tr class="border-b-2 border-gray-200 p-2">
+                <td class="p-2 text-center">
+                  <%= product.name %>
+                </td>
+                <td class="p-2 text-center">
+                  <%= product_quantity(product) %>
+                </td>
+                <td class="p-2 text-center">
+                  <%= number_to_currency(product.price/100.0) %>
+                </td>
+                <td class="p-2 text-center">
+                  $<%= subtotal_price(product) %>
+                </td>
+                <td class="py-2 text-center">
+                  <%= link_to remove_from_cart_path(product), class: '', method: :delete do %>
+                    <%= heroicon "minus-circle", variant: :solid, options: { class: 'text-red-500 h-5 inline-block align-text-top' } %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+
+            <tfoot>
+            <tr>
+              <td colspan="2"></td>
+              <td class="font-bold text-center">
+                TOTAL
+              </td>
+              <td class="p-2 font-bold text-center">
+                $<%= @total_price %>
+              </td>
+              <td colspan="1"></td>
+            </tr>
+            <tr>
+              <td colspan="3"></td>
+              <td>
+                <%= button_to 'Checkout', checkout_create_path, class: 'btn-buy', method: :post, remote: true, data: { disable_with: 'validating...' } %>
+              </td>
+              <td colspan="1"></td>
+            </tr>
+            </tfoot>
+          </table>
+
+        </div>
+        <!-- ./Table -->
+
+
+
+      <% end %>
+    </div>
+
+  </div>
+</section>

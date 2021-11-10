@@ -235,8 +235,36 @@ Real-time compilation gem. Follow these steps in development environment:
         run rake db:migrate
 
 
+## NGrok - Public URLs for testing Webhooks
+https://dashboard.ngrok.com/get-started/setup
+
+* To start an HTTP tunnel forwarding to your local port 3000, run this command from the folder where ngrok is located:
+
+
+    >> ./ngrok http 3000
+
+* Web interface
+
+
+    http://127.0.0.1:4040/inspect/http
+
+## Check Rails Routes from Web
+* In the browser, go to:
+
+
+    http://localhost:3000/rails/info/routes
+
+
 # TEST APP: STRIPE CART | Deployment Guide
 * Deploy to Heroku via Git
+
+
+* DB Migrations
+  
+
+    heroku run rake db:migrate --app stripe-cart-staging
+    heroku run rake db:migrate --app stripe-cart-prod
+
 
 
 # Other Topics to Include

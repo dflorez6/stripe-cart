@@ -50,6 +50,11 @@ gem "heroicon"
 gem 'turbolinks', '~> 5'
 
 #===============#
+# Payments
+#===============#
+gem 'stripe'
+
+#===============#
 # Group by date
 #===============#
 gem 'groupdate'

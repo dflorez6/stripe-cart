@@ -1,0 +1,11 @@
+//===============
+// UI Basic
+//===============
+// Wrappers
+.page-wrapper {
+  @apply w-screen min-h-screen pt-16
+}
+
+.container {
+  @apply px-4 sm:px-6 lg:px-8 xl:px-12
+}

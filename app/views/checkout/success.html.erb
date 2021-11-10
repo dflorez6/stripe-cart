@@ -1,0 +1,49 @@
+<section class="page-wrapper">
+  <div class="container">
+
+    <h1 class="mb-4">
+      Success
+    </h1>
+
+    <!--
+    <%# @session = Stripe::Checkout::Session.retrieve(params[:session_id]) %>
+    <%#= @session.payment_intent %>
+    <br>
+    <%#= Stripe::PaymentIntent.retrieve(@session.payment_intent) %>
+    <hr>
+    -->
+
+    <h2 class="font-semibold inline-block">
+      Checkout Status:
+    </h2>
+    <p class="inline-block">
+      <%= @session_with_expand.payment_status %>
+    </p>
+    <br>
+
+    <h2 class="font-semibold inline-block">
+      Amount Paid:
+    </h2>
+    <p class="inline-block">
+      <%= number_to_currency(@session_with_expand.amount_total/100.0) %>
+      <%= @session_with_expand.currency.upcase %>
+    </p>
+
+    <%# TODO: Display items purchased, with unit price? as a receipt? %>
+    <h2 class="mt-4 font-semibold block">
+      Items purchased:
+    </h2>
+    <% @session_with_expand.line_items.data.each do |line_item|  %>
+      <ul>
+        <% product = Product.find_by(stripe_product_id: line_item.price.product) %>
+        <li>
+          <%= product.name %> | <%= number_to_currency(line_item.price.unit_amount/100.0) %>
+        </li>
+    <% end  %>
+    </ul>
+
+
+
+
+  </div>
+</section>
